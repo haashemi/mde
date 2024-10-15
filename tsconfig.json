@@ -1,0 +1,9 @@
+{
+  "extends": "@fullstacksjs/tsconfig/react",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "paths": { "@/app/*": ["./src/*"], "@/public/*": ["./public/*"] }
+  },
+  "include": ["src", "tailwind.config.ts", "vite.config.ts"],
+  "exclude": ["node_modules"]
+}

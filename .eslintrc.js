@@ -3,6 +3,7 @@ const { init } = require("@fullstacksjs/eslint-config/init");
 module.exports = init({
   modules: {
     react: true,
+    next: true,
     typescript: { parserProject: true, resolverProject: "./tsconfig.json" },
     strict: true,
     import: true,

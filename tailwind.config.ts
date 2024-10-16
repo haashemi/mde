@@ -3,13 +3,13 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["selector", '[data-theme="dark"]'],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   plugins: [typography],
   future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       fontFamily: {
-        sans: `"Inter", "Vazirmatn", sans-serif`,
+        sans: ["var(--font-inter)", "var(--font-vazirmatn)", "sans-serif"],
       },
     },
   },

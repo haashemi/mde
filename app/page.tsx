@@ -1,8 +1,9 @@
+"use client";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { useRemark } from "react-remark";
 
-import { Button } from "./components/ui/button";
+import { Button } from "@/app/_components/ui/button";
 
 const initialText = "# Hello World!\n\nHere's a simple Markdown editor, use it however you want.";
 
@@ -23,7 +24,7 @@ const Article = ({ children }: { children: React.ReactNode }) => (
 
 const App = () => {
   const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
-  const [view, setView] = useState<"all" | "editor" | "preview">("all");
+  const [view, setView] = useState<"both" | "editor" | "preview">("both");
   const [rawMarkdown, setRawMarkdown] = useState(initialText);
   const [reactContent, setMarkdownSource] = useRemark();
   const { setTheme, resolvedTheme } = useTheme();
@@ -36,7 +37,7 @@ const App = () => {
   const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
 
   return (
-    <div className="flex h-screen flex-col gap-2 bg-white p-2 dark:bg-black">
+    <main className="flex h-screen flex-col gap-2 p-2">
       <header className="flex h-14 items-center justify-between px-2">
         <Button onClick={() => setTheme(nextTheme)}>{nextTheme.charAt(0).toUpperCase() + nextTheme.slice(1)}</Button>
 
@@ -46,9 +47,9 @@ const App = () => {
           </Button>
           <Button
             className="rounded-none border-x border-x-zinc-300 dark:border-x-zinc-700"
-            onClick={() => setView("all")}
+            onClick={() => setView("both")}
           >
-            All
+            Both
           </Button>
           <Button className="rounded-l-none" onClick={() => setView("preview")}>
             Preview
@@ -58,12 +59,12 @@ const App = () => {
         <Button onClick={() => setDir(nextDir)}>{dir.toUpperCase()}</Button>
       </header>
       <div dir={dir} className="flex w-full flex-1 flex-col gap-2 overflow-hidden lg:flex-row">
-        {view === "all" || view === "editor" ? (
+        {view === "both" || view === "editor" ? (
           <Editor rawMarkdown={rawMarkdown} setRawMarkdown={setRawMarkdown} />
         ) : null}
-        {view === "all" || view === "preview" ? <Article>{reactContent}</Article> : null}
+        {view === "both" || view === "preview" ? <Article>{reactContent}</Article> : null}
       </div>
-    </div>
+    </main>
   );
 };
 

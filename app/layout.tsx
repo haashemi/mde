@@ -4,7 +4,10 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Vazirmatn } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
-import cn from "@/app/_lib/cn";
+import { Header } from "./_components/header";
+import { ContentProvider } from "./_contexts/content-context";
+import { DirectionProvider } from "./_contexts/direction-context";
+import { EditorViewProvider } from "./_contexts/editor-view-context";
 
 const inter = Inter({ variable: "--font-inter" });
 const vazirmatn = Vazirmatn({ variable: "--font-vazirmatn" });
@@ -24,15 +27,22 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          "bg-white font-sans text-black antialiased dark:bg-black dark:text-white",
-          inter.variable,
-          vazirmatn.variable,
-        )}
+        className={`bg-white font-sans text-black antialiased dark:bg-black dark:text-white ${inter.variable} ${vazirmatn.variable}`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <EditorViewProvider>
+            <DirectionProvider>
+              <ContentProvider>
+                <main className="flex h-screen flex-col gap-2 overflow-hidden p-2">
+                  <Header />
+                  {children}
+                </main>
+              </ContentProvider>
+            </DirectionProvider>
+          </EditorViewProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

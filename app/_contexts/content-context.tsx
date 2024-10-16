@@ -25,7 +25,7 @@ export const ContentProvider = ({ children }: { children: ReactNode }) => {
   // Load the stored content from localStorage
   useEffect(() => {
     const storedContent = localStorage.getItem("editor-content");
-    if (storedContent && ["ltr", "rtl"].includes(storedContent)) setContent(storedContent);
+    if (storedContent) setContent(storedContent);
   }, []);
 
   const value = useMemo(() => ({ content, setContent: setAndStoreContent }), [content]);

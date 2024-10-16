@@ -10,11 +10,17 @@ import {
   RiTextDirectionR,
 } from "react-icons/ri";
 
-import { Button } from "@/app/_components/ui/button";
 import { useDirection } from "@/app/_contexts/direction-context";
 import { useEditorView } from "@/app/_contexts/editor-view-context";
 import { useMounted } from "@/app/_hooks/use-mounted";
 import cn from "@/app/_lib/cn";
+
+const HeaderButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button
+    {...props}
+    className={`relative aspect-square h-full overflow-hidden p-3 hover:bg-zinc-200 focus:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800 dark:focus:bg-zinc-900 ${props.className ?? ""}`}
+  />
+);
 
 export const Header = () => {
   const isMounted = useMounted();
@@ -29,46 +35,40 @@ export const Header = () => {
   }, [isMounted, resolvedTheme]);
 
   return (
-    <header className="flex h-14 items-center justify-between px-2">
-      <Button disabled={!isMounted} onClick={() => setTheme(nextTheme)}>
+    <header className="flex h-12 items-center justify-between border-b border-zinc-300 dark:border-zinc-700">
+      <HeaderButton disabled={!isMounted} onClick={() => setTheme(nextTheme)}>
         {nextTheme === "dark" ? <RiMoonLine className="size-full" /> : <RiSunLine className="size-full" />}
-      </Button>
+      </HeaderButton>
 
-      <div className="inline-flex gap-2">
-        <div className="flex">
-          <Button
-            disabled={view === "editor"}
-            className="rounded-r-none border-r border-x-zinc-300 dark:border-x-zinc-700"
-            onClick={() => setEditorView("editor")}
-          >
-            <RiLayoutColumnFill className="size-full -scale-100" />
-          </Button>
-          <Button disabled={view === "both"} className="rounded-none" onClick={() => setEditorView("both")}>
-            <RiLayoutColumnLine className="size-full" />
-          </Button>
-          <Button
-            disabled={view === "preview"}
-            className="rounded-l-none border-l border-x-zinc-300 dark:border-x-zinc-700"
-            onClick={() => setEditorView("preview")}
-          >
-            <RiLayoutColumnFill className="size-full" />
-          </Button>
+      <div className="inline-flex h-full">
+        <div className="flex h-full ">
+          <HeaderButton disabled={view === "editor"} onClick={() => setEditorView("editor")}>
+            <RiLayoutColumnFill className="size-full rotate-90 -scale-100 lg:rotate-0" />
+          </HeaderButton>
+          <HeaderButton disabled={view === "both"} onClick={() => setEditorView("both")}>
+            <RiLayoutColumnLine className="size-full rotate-90 lg:rotate-0" />
+          </HeaderButton>
+          <HeaderButton disabled={view === "preview"} onClick={() => setEditorView("preview")}>
+            <RiLayoutColumnFill className="size-full rotate-90 lg:rotate-0" />
+          </HeaderButton>
         </div>
 
-        <Button onClick={() => setDirection(nextDir)} className="relative aspect-square overflow-hidden px-0">
+        <span className="h-full w-[1px] bg-zinc-300 dark:bg-zinc-700" />
+
+        <HeaderButton onClick={() => setDirection(nextDir)} className="p-0">
           <RiTextDirectionR
             className={cn(
-              "absolute size-full transition-transform ease-in-out duration-300 p-2",
+              "absolute size-full top-0 left-0 p-3",
               nextDir === "ltr" ? "translate-y-full" : "translate-y-0",
             )}
           />
           <RiTextDirectionL
             className={cn(
-              "absolute size-full transition-transform ease-in-out duration-300 p-2",
+              "absolute size-full top-0 left-0 p-3",
               nextDir === "rtl" ? "-translate-y-full" : "translate-y-0",
             )}
           />
-        </Button>
+        </HeaderButton>
       </div>
     </header>
   );

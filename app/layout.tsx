@@ -13,8 +13,8 @@ const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter" 
 const vazirmatn = Vazirmatn({ subsets: ["arabic"], variable: "--font-vazirmatn" });
 
 export const metadata: Metadata = {
-  title: "Minimal Markdown Editor",
-  description: "A simple and minimal Online Markdown editor",
+  title: "Markdown Editor",
+  description: "A simple Online Markdown editor",
 };
 
 export const viewport: Viewport = {

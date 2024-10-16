@@ -1,3 +1,3 @@
-export const defaultMarkdownContent = `# Welcome to Minimal Markdown Editor!
+export const defaultMarkdownContent = `# Welcome to Markdown Editor!
 
-- [GitHub Repository](https://github.com/haashemi/mme)`;
+- [GitHub Repository](https://github.com/haashemi/mde)`;

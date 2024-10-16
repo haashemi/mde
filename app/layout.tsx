@@ -4,7 +4,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Vazirmatn } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
-import { Header } from "./_components/header";
 import { ContentProvider } from "./_contexts/content-context";
 import { DirectionProvider } from "./_contexts/direction-context";
 import { EditorViewProvider } from "./_contexts/editor-view-context";
@@ -34,12 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider>
           <EditorViewProvider>
             <DirectionProvider>
-              <ContentProvider>
-                <main className="flex h-screen flex-col gap-2 overflow-hidden p-2">
-                  <Header />
-                  {children}
-                </main>
-              </ContentProvider>
+              <ContentProvider>{children}</ContentProvider>
             </DirectionProvider>
           </EditorViewProvider>
         </ThemeProvider>

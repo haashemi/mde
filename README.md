@@ -1,10 +1,10 @@
-# MME: Minimal Markdown Editor
+# MDE 
 
-A simple and minimal web-based markdown editor with only essential features.
+MDE is a simple and minimal web-based markdown editor with only essential features.
 
 ## Usage:
 
-- Visit: [mme.haashemi.dev](https://mme.haashemi.dev)
+- Visit: [mde.haashemi.dev](https://mde.haashemi.dev)
 
 - Selfhost: [Deployment](#deployment)
 

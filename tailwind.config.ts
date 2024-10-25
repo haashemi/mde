@@ -1,5 +1,6 @@
-import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["selector", '[data-theme="dark"]'],
@@ -9,7 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "var(--font-vazirmatn)", "sans-serif"],
+        sans: ["var(--font-vazirmatn)", "sans-serif"],
       },
     },
   },

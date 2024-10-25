@@ -1,4 +1,8 @@
 "use client";
+import { useDirection } from "@/app/_contexts/direction-context";
+import { useEditorView } from "@/app/_contexts/editor-view-context";
+import { useMounted } from "@/app/_hooks/use-mounted";
+import cn from "@/app/_lib/cn";
 import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import {
@@ -10,15 +14,11 @@ import {
   RiTextDirectionR,
 } from "react-icons/ri";
 
-import { useDirection } from "@/app/_contexts/direction-context";
-import { useEditorView } from "@/app/_contexts/editor-view-context";
-import { useMounted } from "@/app/_hooks/use-mounted";
-import cn from "@/app/_lib/cn";
-
-const HeaderButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+const HeaderButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
     {...props}
-    className={`relative aspect-square h-full overflow-hidden p-3 hover:bg-zinc-200 focus:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800 dark:focus:bg-zinc-900 ${props.className ?? ""}`}
+    className={`relative aspect-square h-full overflow-hidden p-3 hover:bg-zinc-200 focus:bg-zinc-100 disabled:opacity-50 dark:hover:bg-zinc-800 dark:focus:bg-zinc-900 ${className ?? ""}`}
+    type="button"
   />
 );
 
@@ -55,16 +55,16 @@ export const Header = () => {
 
         <span className="h-full w-[1px] bg-zinc-300 dark:bg-zinc-700" />
 
-        <HeaderButton onClick={() => setDirection(nextDir)} className="p-0">
+        <HeaderButton className="p-0" onClick={() => setDirection(nextDir)}>
           <RiTextDirectionR
             className={cn(
-              "absolute size-full top-0 left-0 p-3",
+              "absolute left-0 top-0 size-full p-3",
               nextDir === "ltr" ? "translate-y-full" : "translate-y-0",
             )}
           />
           <RiTextDirectionL
             className={cn(
-              "absolute size-full top-0 left-0 p-3",
+              "absolute left-0 top-0 size-full p-3",
               nextDir === "rtl" ? "-translate-y-full" : "translate-y-0",
             )}
           />

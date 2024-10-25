@@ -19,14 +19,13 @@
     "tailwind-merge": "2.5.4"
   },
   "devDependencies": {
-    "@fullstacksjs/eslint-config": "10.11.1",
+    "@fullstacksjs/eslint-config": "11.4.0",
     "@fullstacksjs/tsconfig": "1.1.0",
     "@tailwindcss/typography": "0.5.15",
-    "@types/node": "^22.7.5",
-    "@types/react": "18.3.11",
+    "@types/node": "^22.8.0",
+    "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "autoprefixer": "10.4.20",
-    "eslint": "8.57.0",
+    "eslint": "9.13.0",
     "postcss": "8.4.47",
     "prettier": "3.3.3",
     "tailwindcss": "3.4.14",

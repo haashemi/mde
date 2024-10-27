@@ -1,20 +1,17 @@
-# MDE 
+<img width="128px" height="128px" style="float: right;" src="./public/favicon.svg">
 
-MDE is a simple and minimal web-based markdown editor with only essential features.
+# MDE
 
-## Usage:
+[MDE](https://mde.haashemi.dev) is a simple web-based markdown editor with the features that you actually need.
 
-- Visit: [mde.haashemi.dev](https://mde.haashemi.dev)
+## Roadmap
 
-- Selfhost: [Deployment](#deployment)
+_These are not in any particular order._
 
-## Deployment
-
-If you want to host it, it's as easy as deploying a simple Next.JS app.
-
-```bash
-pnpm install
-pnpm build
-# Host the 'out' dir in your prefered way, example:
-pnpx serve@latest out
-```
+- Implement remark/rehype plugin toggle menu
+- Implement a reset button
+- Implement a capture preview button
+- Implement a fully functional PWA
+- Implement a recent documents menu
+- Implement a better editor section (e.g., Syntax Highlight)
+- Update the scrollbar of the panels

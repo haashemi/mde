@@ -1,10 +1,15 @@
 {
-  "extends": "@fullstacksjs/tsconfig/next",
+  "root": true,
+  "extends": "@fullstacksjs/tsconfig/react",
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "plugins": [{ "name": "next" }],
-    "paths": { "@/*": ["./*"] }
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "paths": {
+      "@/mde/lib": ["./src/lib/index.ts"],
+      "@/mde/components": ["./src/components/index.ts"],
+      "@/mde/stores": ["./src/stores/index.ts"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "vite.config.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,8 +1,5 @@
-"use client";
-import { useDirection } from "@/app/_contexts/direction-context";
-import { useEditorView } from "@/app/_contexts/editor-view-context";
-import { useMounted } from "@/app/_hooks/use-mounted";
-import cn from "@/app/_lib/cn";
+import { cn } from "@/mde/lib";
+import { useMdeDirection, useMdeView } from "@/mde/stores";
 import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import {
@@ -23,25 +20,21 @@ const HeaderButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLBu
 );
 
 export const Header = () => {
-  const isMounted = useMounted();
+  const [view, setEditorView] = useMdeView();
+  const [direction, setDirection] = useMdeDirection();
   const { resolvedTheme, setTheme } = useTheme();
-  const { view, setEditorView } = useEditorView();
-  const { direction, setDirection } = useDirection();
 
   const nextDir = useMemo(() => (direction === "rtl" ? "ltr" : "rtl"), [direction]);
-
-  const nextTheme = useMemo(() => {
-    return isMounted && resolvedTheme === "dark" ? "light" : "dark";
-  }, [isMounted, resolvedTheme]);
+  const nextTheme = useMemo(() => (resolvedTheme === "dark" ? "light" : "dark"), [resolvedTheme]);
 
   return (
     <header className="flex h-12 items-center justify-between border-b border-zinc-300 dark:border-zinc-700">
-      <HeaderButton disabled={!isMounted} onClick={() => setTheme(nextTheme)}>
+      <HeaderButton onClick={() => setTheme(nextTheme)}>
         {nextTheme === "dark" ? <RiMoonLine className="size-full" /> : <RiSunLine className="size-full" />}
       </HeaderButton>
 
       <div className="inline-flex h-full">
-        <div className="flex h-full ">
+        <div dir={direction} className="flex h-full ">
           <HeaderButton disabled={view === "editor"} onClick={() => setEditorView("editor")}>
             <RiLayoutColumnFill className="size-full rotate-90 -scale-100 lg:rotate-0" />
           </HeaderButton>

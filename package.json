@@ -1,16 +1,17 @@
 {
   "name": "mde",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/favicon.svg"
   },
   "dependencies": {
     "clsx": "2.1.1",
-    "next": "14.2.15",
+    "jotai": "2.10.1",
     "next-themes": "0.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -22,13 +23,19 @@
     "@fullstacksjs/eslint-config": "11.4.0",
     "@fullstacksjs/tsconfig": "1.1.0",
     "@tailwindcss/typography": "0.5.15",
-    "@types/node": "^22.8.0",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
+    "@vite-pwa/assets-generator": "0.2.6",
+    "@vitejs/plugin-react-swc": "3.7.1",
+    "autoprefixer": "10.4.20",
     "eslint": "9.13.0",
     "postcss": "8.4.47",
     "prettier": "3.3.3",
     "tailwindcss": "3.4.14",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "vite": "5.4.10",
+    "vite-plugin-checker": "0.8.0",
+    "vite-plugin-pwa": "0.20.5",
+    "vite-tsconfig-paths": "5.0.1"
   }
 }

@@ -1,11 +1,12 @@
-import { cn } from "@/mde/lib";
-import { useMdeDirection, useMdeView } from "@/mde/stores";
+import { cn, defaultMarkdownContent } from "@/mde/lib";
+import { useMdeContent, useMdeDirection, useMdeView } from "@/mde/stores";
 import { useTheme } from "next-themes";
 import { useMemo } from "react";
 import {
   RiLayoutColumnFill,
   RiLayoutColumnLine,
   RiMoonLine,
+  RiRestartLine,
   RiSunLine,
   RiTextDirectionL,
   RiTextDirectionR,
@@ -20,6 +21,7 @@ const HeaderButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLBu
 );
 
 export const Header = () => {
+  const [_, setContent] = useMdeContent();
   const [view, setEditorView] = useMdeView();
   const [direction, setDirection] = useMdeDirection();
   const { resolvedTheme, setTheme } = useTheme();
@@ -27,11 +29,22 @@ export const Header = () => {
   const nextDir = useMemo(() => (direction === "rtl" ? "ltr" : "rtl"), [direction]);
   const nextTheme = useMemo(() => (resolvedTheme === "dark" ? "light" : "dark"), [resolvedTheme]);
 
+  const resetApp = () => {
+    setDirection("ltr");
+    setEditorView("both");
+    setContent(defaultMarkdownContent);
+  };
+
   return (
     <header className="flex h-12 items-center justify-between border-b border-zinc-300 dark:border-zinc-700">
-      <HeaderButton onClick={() => setTheme(nextTheme)}>
-        {nextTheme === "dark" ? <RiMoonLine className="size-full" /> : <RiSunLine className="size-full" />}
-      </HeaderButton>
+      <div className="inline-flex h-full">
+        <HeaderButton onClick={() => setTheme(nextTheme)}>
+          {nextTheme === "dark" ? <RiMoonLine className="size-full" /> : <RiSunLine className="size-full" />}
+        </HeaderButton>
+        <HeaderButton onClick={resetApp}>
+          <RiRestartLine className="size-full rotate-45 -scale-x-100" />
+        </HeaderButton>
+      </div>
 
       <div className="inline-flex h-full">
         <div dir={direction} className="flex h-full ">

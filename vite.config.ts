@@ -7,6 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [
     checker({
+      terminal: false,
       typescript: true,
       eslint: { lintCommand: "eslint ./", useFlatConfig: true },
     }),

@@ -1,6 +1,10 @@
 import { cn } from "@/mde/lib";
 import { useMdeContent, useMdeView } from "@/mde/stores";
 import Markdown from "react-markdown";
+import rehypeAutoLinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import remarkGemoji from "remark-gemoji";
+import remarkGfm from "remark-gfm";
 
 export const EditorPanel = () => {
   const [view] = useMdeView();
@@ -36,7 +40,9 @@ export const PreviewPanel = () => {
         isHidden && "h-0 flex-none p-0 lg:h-full lg:w-0",
       )}
     >
-      <Markdown>{content}</Markdown>
+      <Markdown rehypePlugins={[rehypeSlug, rehypeAutoLinkHeadings]} remarkPlugins={[remarkGemoji, remarkGfm]}>
+        {content}
+      </Markdown>
     </article>
   );
 };

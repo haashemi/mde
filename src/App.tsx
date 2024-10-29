@@ -6,10 +6,11 @@ function App() {
   const [direction] = useMdeDirection();
 
   return (
-    <main className="flex h-screen flex-col overflow-hidden">
+    <main className="flex h-screen flex-col">
       <Header />
-      <div dir={direction} className="flex w-full flex-1 flex-col gap-2 overflow-hidden lg:flex-row">
+      <div dir={direction} className="flex w-full flex-1 flex-col overflow-hidden lg:flex-row">
         <EditorPanel />
+        <span className="border border-zinc-300 dark:border-zinc-700" />
         <PreviewPanel />
       </div>
     </main>

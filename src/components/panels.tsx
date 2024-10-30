@@ -18,7 +18,7 @@ export const EditorPanel = () => {
       value={content}
       onChange={(v) => setContent(v.target.value)}
       className={cn(
-        "min-w-0 flex-1 shrink-0 overflow-y-auto bg-zinc-50 p-4 transition-all dark:bg-zinc-950",
+        "min-w-0 flex-1 shrink-0 overflow-y-auto bg-zinc-50 p-4 font-mono transition-all dark:bg-zinc-950",
         "resize-none border-none text-lg outline-none",
         view === "preview" && "h-0 flex-none p-0 lg:h-full lg:w-0",
       )}
@@ -35,6 +35,7 @@ export const PreviewPanel = () => {
 
   return (
     <article
+      style={{ contentVisibility: "auto" }}
       className={cn(
         "min-w-0 flex-1 shrink-0 overflow-y-auto bg-zinc-50 p-4 transition-all dark:bg-zinc-950",
         "prose prose-zinc max-w-none dark:prose-invert",

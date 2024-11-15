@@ -1,8 +1,10 @@
 import { cn } from "@/mde/lib";
 import { useMdeContent, useMdeView } from "@/mde/stores";
+import { useEffect, useMemo } from "react";
 import Markdown from "react-markdown";
 import remarkGemoji from "remark-gemoji";
 import remarkGfm from "remark-gfm";
+import { useDebounce } from "use-debounce";
 
 export const EditorPanel = () => {
   const [view] = useMdeView();
@@ -26,6 +28,14 @@ export const PreviewPanel = () => {
   const [view] = useMdeView();
   const [mdeContent] = useMdeContent();
 
+  const [content, setContent] = useDebounce(mdeContent, 100);
+  const renderedMarkdown = useMemo(
+    () => <Markdown remarkPlugins={[remarkGfm, remarkGemoji]}>{content}</Markdown>,
+    [content],
+  );
+
+  useEffect(() => setContent(mdeContent), [mdeContent, setContent]);
+
   return (
     <article
       style={{ contentVisibility: "auto" }}
@@ -35,7 +45,7 @@ export const PreviewPanel = () => {
         view === "editor" && "h-0 flex-none p-0 lg:h-full lg:w-0",
       )}
     >
-      <Markdown remarkPlugins={[remarkGfm, remarkGemoji]}>{mdeContent}</Markdown>
+      {renderedMarkdown}
     </article>
   );
 };

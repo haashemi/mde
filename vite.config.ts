@@ -13,6 +13,24 @@ export default defineConfig({
     checker({ terminal: false, typescript: true, eslint: { lintCommand: "eslint ./", useFlatConfig: true } }),
     tsconfigPaths(),
     react({ babel: { plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]] } }),
-    VitePWA({ registerType: "autoUpdate" }),
+    VitePWA({
+      registerType: "autoUpdate",
+      includeAssets: ["favicon.ico", "favicon.svg"],
+      manifest: {
+        name: "Markdown Editor",
+        short_name: "MDE",
+        description: "A simple Online Markdown editor",
+        theme_color: "#000",
+        background_color: "#000",
+        screenshots: [{ src: "/screenshots/desktop.png", sizes: "2560x1440", type: "image/png" }],
+        icons: [
+          { src: "pwa-64x64.png", sizes: "64x64", type: "image/png" },
+          { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
+          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
+          { src: "pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+          { src: "maskable-icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+        ],
+      },
+    }),
   ],
 });

@@ -22,7 +22,7 @@ export default defineConfig({
         description: "A simple Online Markdown editor",
         theme_color: "#000",
         background_color: "#000",
-        screenshots: [{ src: "/screenshots/desktop.png", sizes: "2560x1440", type: "image/png" }],
+        screenshots: [{ src: "/screenshots/desktop.png", sizes: "2560x1440", type: "image/png", form_factor: "wide" }],
         icons: [
           { src: "pwa-64x64.png", sizes: "64x64", type: "image/png" },
           { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },

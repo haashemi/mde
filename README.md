@@ -4,17 +4,37 @@
 
 [MDE](https://mde.haashemi.dev) is a simple web-based markdown editor with the features that you actually need.
 
-## Current Plugins
+## How it works?
 
-MDE is using a few plugins to make it more functional and useful until adding the plugin toggle menu. These plugins are:
+It's made of just a `textarea` for input and an `article` for the rendered markdown. The markdown input is rendered using [react-markdown](https://github.com/remarkjs/react-markdown) with `remark-gfm` and `remark-gemoji` plugins. RTL support happens by changing the direction of almost the whole app.
 
-- _Remark plugins_:
-  - `remark-gemoji`
-  - `remark-gfm`
+![screenshot](./public/screenshots/desktop.png)
+
+## Usage
+
+To use this project, you can use both the hosted version, or selfhost it by yourself.
+
+### Hosted version
+
+Visit [mde.haashemi.dev](https://mde.haashemi.dev)
+
+### Selfhost it
+
+1. Build the project
+
+```
+# Install dependencies
+pnpm install
+# Build the project
+pnpm build
+```
+
+2. Host the `dist` directory with something like NginX
 
 ## Roadmap
 
-_These are not in any particular order._
+Here are some features that I _might_ add to mde someday.
+(_These are not in any particular order._)
 
 - Implement a fully functional PWA
 - Implement a better editor section (e.g., Syntax Highlight)

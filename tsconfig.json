@@ -3,6 +3,7 @@
   "extends": "@fullstacksjs/tsconfig/react",
   "compilerOptions": {
     "target": "ESNext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "paths": {
       "@/mde/lib": ["./src/lib/index.ts"],

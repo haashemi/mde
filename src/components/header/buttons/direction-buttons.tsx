@@ -1,6 +1,7 @@
+import { RiTextDirectionL, RiTextDirectionR } from "react-icons/ri";
+
 import { cn } from "@/mde/lib";
 import { useMdeDirection } from "@/mde/stores";
-import { RiTextDirectionL, RiTextDirectionR } from "react-icons/ri";
 
 import { Button } from "./button";
 

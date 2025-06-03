@@ -1,6 +1,7 @@
-import { defaultMarkdownContent } from "@/mde/lib";
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+
+import { defaultMarkdownContent } from "@/mde/lib";
 
 type MdeViewTypes = "both" | "editor" | "preview";
 

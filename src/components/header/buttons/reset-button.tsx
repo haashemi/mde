@@ -1,6 +1,7 @@
+import { RiRestartLine } from "react-icons/ri";
+
 import { defaultMarkdownContent } from "@/mde/lib";
 import { useMdeContent, useMdeDirection, useMdeView } from "@/mde/stores";
-import { RiRestartLine } from "react-icons/ri";
 
 import { Button } from "./button";
 

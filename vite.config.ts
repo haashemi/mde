@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { checker } from "vite-plugin-checker";
@@ -11,6 +12,7 @@ const ReactCompilerConfig = {
 export default defineConfig({
   plugins: [
     checker({ terminal: false, typescript: true, eslint: { lintCommand: "eslint ./", useFlatConfig: true } }),
+    tailwindcss(),
     tsconfigPaths(),
     react({ babel: { plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]] } }),
     VitePWA({

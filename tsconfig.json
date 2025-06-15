@@ -6,9 +6,10 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "paths": {
-      "@/mde/lib": ["./src/lib/index.ts"],
       "@/mde/components": ["./src/components/index.ts"],
-      "@/mde/stores": ["./src/stores/index.ts"]
+      "@/mde/lib": ["./src/lib/index.ts"],
+      "@/mde/stores": ["./src/stores/index.ts"],
+      "@/mde/ui": ["./src/components/ui/index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "vite.config.ts"],

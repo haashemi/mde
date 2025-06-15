@@ -1,4 +1,4 @@
-import { DirectionButton, EditorViewButtons, ResetButton, ThemeSwitchButton } from "./buttons";
+import { DirectionButton, EditorViewButtons, ResetButton, ThemeSwitchButton } from "./header-buttons";
 
 export const Header = () => {
   return (

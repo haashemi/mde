@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue, useStore } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
-import { defaultMarkdownContent } from "@/lib/constants";
+import { defaultMarkdownContent } from "@/lib/default-content";
 
 export type MdeView = "both" | "editor" | "preview";
 

@@ -4,13 +4,13 @@ import { MagicWandIcon } from "@phosphor-icons/react";
 import { useDeferredValue, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
-import { isModKey, useHotkey } from "@/hooks/use-hotkey";
 import { formatMarkdown } from "@/lib/format";
+import { useMdeContent } from "@/lib/store";
 import { syncedScrollRef } from "@/lib/synced-scroll";
-import { useMdeContent } from "@/stores";
+import { isModKey, useHotkey } from "@/lib/use-hotkey";
 
-import { HeaderTooltip } from "./header-button";
 import { Panel } from "./panel";
+import { ShortcutTooltip } from "./shortcut-tooltip";
 
 const INDENT = "  ";
 
@@ -61,11 +61,11 @@ export const EditorPanel = () => {
   useHotkey(isFormatKey, () => void format());
 
   const formatButton = (
-    <HeaderTooltip label="Format" shortcut="Shift Alt F">
+    <ShortcutTooltip label="Format" shortcut="Shift Alt F">
       <Button variant="ghost" size="icon-xs" aria-label="Format" onClick={() => void format()}>
         <MagicWandIcon />
       </Button>
-    </HeaderTooltip>
+    </ShortcutTooltip>
   );
 
   return (

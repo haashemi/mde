@@ -7,7 +7,7 @@ import { Header } from "@/components/header";
 import { PanelDivider } from "@/components/panel";
 import { PreviewPanel } from "@/components/preview-panel";
 import { findPreviewFont, fontFamily, fontScales } from "@/lib/fonts";
-import { useMdeDirection, useMdeFontSizeValue, useMdePreviewFontValue, useMdeView } from "@/stores";
+import { useMdeDirection, useMdeFontSizeValue, useMdePreviewFontValue, useMdeView } from "@/lib/store";
 
 // Set on the root so the font reaches everything, including the portalled drawer and tooltips.
 const useAppFont = () => {

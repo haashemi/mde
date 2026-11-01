@@ -1,4 +1,4 @@
-import type { MdeFontSize } from "@/stores";
+import type { MdeFontSize } from "@/lib/store";
 
 /** Multiplies the editor and preview text size; the app's own chrome keeps its size. */
 export const fontScales: Record<MdeFontSize, number> = { small: 0.875, medium: 1, large: 1.125, larger: 1.25 };
@@ -121,7 +121,7 @@ export const previewFonts: PreviewFont[] = [
     name: "Geist Serif",
     family: "Geist Serif",
     category: "serif",
-    load: () => import("@/app/fonts/geist-serif/index.css"),
+    load: () => import("@/fonts/geist-serif/index.css"),
   },
   {
     id: "geist-mono",

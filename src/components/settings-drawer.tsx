@@ -11,14 +11,14 @@ import {
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import type { MdeDirection, MdeFontSize } from "@/stores";
+import type { MdeDirection, MdeFontSize } from "@/lib/store";
 
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { defaultMarkdownContent } from "@/lib/constants";
+import { defaultMarkdownContent } from "@/lib/default-content";
 import { downloadMarkdown, markdownFileName } from "@/lib/download";
 import { previewFonts } from "@/lib/fonts";
 import {
@@ -28,7 +28,7 @@ import {
   useMdeFontSize,
   useMdePreviewFont,
   useMdeView,
-} from "@/stores";
+} from "@/lib/store";
 
 const SettingsSection = ({ label, children }: { label: string; children: ReactNode }) => (
   <section className="border-b">

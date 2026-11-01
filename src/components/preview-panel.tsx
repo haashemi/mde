@@ -1,8 +1,8 @@
 import { useDeferredValue } from "react";
 
 import { highlightThemeCss } from "@/lib/highlighter";
+import { useMdeContentValue } from "@/lib/store";
 import { syncedScrollRef } from "@/lib/synced-scroll";
-import { useMdeContentValue } from "@/stores";
 
 import { Markdown } from "./markdown";
 import { Panel } from "./panel";

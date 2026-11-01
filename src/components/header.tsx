@@ -1,16 +1,21 @@
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { ColumnsIcon, EyeIcon, GearSixIcon, PencilSimpleLineIcon } from "@phosphor-icons/react";
 import { lazy, Suspense, useRef, useState } from "react";
 
-import type { MdeView } from "@/stores";
+import type { MdeView } from "@/lib/store";
 
+import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { isModKey, useHotkey } from "@/hooks/use-hotkey";
 import { downloadMarkdown } from "@/lib/download";
-import { useGetMdeContent, useMdeView } from "@/stores";
+import { useGetMdeContent, useMdeView } from "@/lib/store";
+import { isModKey, useHotkey } from "@/lib/use-hotkey";
 
-import { HeaderButton, HeaderTooltip } from "./header-button";
+import { ShortcutTooltip } from "./shortcut-tooltip";
+
+const HeaderButton = (props: ComponentProps<typeof Button>) => (
+  <Button variant="ghost" className="h-full min-w-11 px-3" {...props} />
+);
 
 const loadSettingsDrawer = () => import("./settings-drawer");
 const SettingsDrawer = lazy(loadSettingsDrawer);
@@ -44,7 +49,7 @@ const ViewToggle = () => {
       onValueChange={([next]) => next && setView(next as MdeView)}
     >
       {views.map(({ value, label, shortcut, icon }) => (
-        <HeaderTooltip key={value} label={label} shortcut={shortcut}>
+        <ShortcutTooltip key={value} label={label} shortcut={shortcut}>
           <ToggleGroupItem
             value={value}
             aria-label={label}
@@ -52,7 +57,7 @@ const ViewToggle = () => {
           >
             {icon}
           </ToggleGroupItem>
-        </HeaderTooltip>
+        </ShortcutTooltip>
       ))}
     </ToggleGroup>
   );
@@ -76,7 +81,7 @@ const SettingsButton = () => {
 
   return (
     <>
-      <HeaderTooltip label="Settings" shortcut="Ctrl ,">
+      <ShortcutTooltip label="Settings" shortcut="Ctrl ,">
         <HeaderButton
           ref={buttonRef}
           aria-label="Settings"
@@ -88,7 +93,7 @@ const SettingsButton = () => {
         >
           <GearSixIcon />
         </HeaderButton>
-      </HeaderTooltip>
+      </ShortcutTooltip>
       {hasOpened && (
         <Suspense>
           <SettingsDrawer open={open} onOpenChange={changeOpen} finalFocus={buttonRef} />

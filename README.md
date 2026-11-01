@@ -12,39 +12,19 @@ It's made of just a `textarea` for input and an `article` for the rendered markd
 
 ## Usage
 
-To use this project, you can use both the hosted version, or selfhost it by yourself.
+To use this project, you can use both the hosted version, or self-host it by yourself.
 
 ### Hosted version
 
 Visit [mde.haashemi.dev](https://mde.haashemi.dev)
 
-### Selfhost it
+### Self-Host it
 
-1. Build the project
+Self-Hosting mde is a bit way too easy. Just build it and host its build files.
 
+```sh
+# Build it
+pnpm install && pnpm build
+# Deploy it
+pnpx serve ./dist
 ```
-# Install dependencies
-pnpm install
-# Build the project
-pnpm build
-```
-
-2. Host the `dist` directory with something like NginX
-
-## Roadmap
-
-Here are some features that I _might_ add to mde someday.
-(_These are not in any particular order._)
-
-- Implement a fully functional PWA
-- Implement a better editor section (e.g., Syntax Highlight)
-- Update the scrollbar of the panels
-- Implement a full-screen menu
-  - Implement remark/rehype plugin toggle menu
-  - ~~Implement a reset button~~
-  - Implement a capture preview button
-  - Implement a recent documents menu
-
-## Contributions
-
-If you're willing to help this project get better in any way, your contribution is highly appreciated.

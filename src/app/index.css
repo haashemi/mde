@@ -94,8 +94,9 @@
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
+  /* `--app-font` is the font picked in settings; without one the app's own fonts are used. */
   html {
-    @apply font-mono;
+    font-family: var(--app-font, var(--font-mono));
     -webkit-tap-highlight-color: transparent;
   }
   /* The panels scroll on their own; the page itself never should. */
@@ -130,17 +131,16 @@
   }
 }
 
-/* `--preview-font` is the font picked in settings; without one the app's own fonts are used. */
 /* Sizes inside are in em so they follow `--font-scale`, the text size picked in settings. */
 .markdown {
   @apply leading-relaxed;
   font-size: calc(0.9375rem * var(--font-scale, 1));
-  font-family: var(--preview-font, var(--font-sans));
+  font-family: var(--app-font, var(--font-sans));
 
   /* Skips the visually hidden "Footnotes" heading, which must stay absolutely positioned. */
   :where(h1, h2, h3, h4, h5, h6):not(.sr-only) {
     @apply relative scroll-mt-4 font-semibold tracking-tight;
-    font-family: var(--preview-font, var(--font-heading));
+    font-family: var(--app-font, var(--font-heading));
   }
   :where(h1) {
     @apply border-b pb-3 text-[1.6em];

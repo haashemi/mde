@@ -1,18 +1,33 @@
 import type { CSSProperties } from "react";
 
-import { Activity } from "react";
+import { Activity, useEffect } from "react";
 
 import { EditorPanel } from "@/components/editor-panel";
 import { Header } from "@/components/header";
 import { PanelDivider } from "@/components/panel";
 import { PreviewPanel } from "@/components/preview-panel";
-import { fontScales } from "@/lib/fonts";
-import { useMdeDirection, useMdeFontSizeValue, useMdeView } from "@/stores";
+import { findPreviewFont, fontFamily, fontScales } from "@/lib/fonts";
+import { useMdeDirection, useMdeFontSizeValue, useMdePreviewFontValue, useMdeView } from "@/stores";
+
+// Set on the root so the font reaches everything, including the portalled drawer and tooltips.
+const useAppFont = () => {
+  const font = findPreviewFont(useMdePreviewFontValue());
+
+  // Only the selected font is ever fetched; until it arrives the fallback stack is shown.
+  useEffect(() => {
+    void font.load?.();
+
+    const family = fontFamily(font);
+    if (family) document.documentElement.style.setProperty("--app-font", family);
+    else document.documentElement.style.removeProperty("--app-font");
+  }, [font]);
+};
 
 function App() {
   const [view] = useMdeView();
   const [direction] = useMdeDirection();
   const fontSize = useMdeFontSizeValue();
+  useAppFont();
 
   // Activity keeps hidden panels mounted (scroll, undo history) without rendering them on every keystroke.
   return (

@@ -113,7 +113,7 @@ const FontSetting = () => {
 
   return (
     <RadioGroup
-      aria-label="Preview font"
+      aria-label="Font"
       value={fontId}
       onValueChange={(value) => setFontId(String(value))}
       className="gap-0 divide-y border"
@@ -199,7 +199,7 @@ interface SettingsDrawerProps {
 export default function SettingsDrawer({ open, onOpenChange, finalFocus }: SettingsDrawerProps) {
   return (
     <Drawer open={open} onOpenChange={onOpenChange} swipeDirection="right">
-      <DrawerContent className="font-mono" finalFocus={finalFocus}>
+      <DrawerContent finalFocus={finalFocus}>
         <div className="flex h-11 shrink-0 items-center justify-between border-b ps-4">
           <DrawerTitle>settings</DrawerTitle>
           <DrawerClose
@@ -221,7 +221,7 @@ export default function SettingsDrawer({ open, onOpenChange, finalFocus }: Setti
           <SettingsSection label="font size">
             <FontSizeSetting />
           </SettingsSection>
-          <SettingsSection label="preview font">
+          <SettingsSection label="font">
             <FontSetting />
           </SettingsSection>
           <SettingsSection label="document">

@@ -4,6 +4,7 @@ import { useDeferredValue, useEffect } from "react";
 
 import { findPreviewFont, fontFamily } from "@/lib/fonts";
 import { highlightThemeCss } from "@/lib/highlighter";
+import { syncedScrollRef } from "@/lib/synced-scroll";
 import { useMdeContentValue, useMdePreviewFontValue } from "@/stores";
 
 import { Markdown } from "./markdown";
@@ -32,6 +33,7 @@ export const PreviewPanel = () => {
         {highlightThemeCss}
       </style>
       <article
+        ref={syncedScrollRef}
         style={{ "--preview-font": fontFamily(font) } as CSSProperties}
         className="markdown relative prose max-w-none flex-1 overflow-y-auto p-4 prose-neutral lg:p-8 dark:prose-invert"
       >

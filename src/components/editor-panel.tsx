@@ -2,6 +2,7 @@ import type { KeyboardEvent } from "react";
 
 import { useDeferredValue } from "react";
 
+import { syncedScrollRef } from "@/lib/synced-scroll";
 import { useMdeContent } from "@/stores";
 
 import { Panel } from "./panel";
@@ -36,6 +37,7 @@ export const EditorPanel = () => {
   return (
     <Panel label="editor" meta={<EditorStats content={content} />}>
       <textarea
+        ref={syncedScrollRef}
         value={content}
         onChange={(event) => setContent(event.target.value)}
         onKeyDown={onKeyDown}

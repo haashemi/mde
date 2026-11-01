@@ -13,11 +13,12 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "favicon.svg", "apple-touch-icon-180x180.png"],
       workbox: {
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             urlPattern: ({ url, sameOrigin }) => sameOrigin && url.pathname.endsWith(".woff2"),
             handler: "CacheFirst",
-            options: { cacheName: "fonts" },
+            options: { cacheName: "fonts", expiration: { maxEntries: 30 } },
           },
         ],
       },

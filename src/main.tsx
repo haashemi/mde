@@ -12,7 +12,7 @@ import App from "./app";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider attribute="class" disableTransitionOnChange>
-      <TooltipProvider delay={400}>
+      <TooltipProvider delay={250}>
         <App />
       </TooltipProvider>
     </ThemeProvider>

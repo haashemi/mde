@@ -25,7 +25,6 @@ const onScroll = (event: Event) => {
   }
 };
 
-/** A ref callback that keeps every element using it scrolled to the same relative position. */
 export const syncedScrollRef = (element: HTMLElement | null) => {
   if (!element) return;
 

@@ -9,11 +9,9 @@ import { PreviewPanel } from "@/components/preview-panel";
 import { findPreviewFont, fontFamily, fontScales } from "@/lib/fonts";
 import { useMdeDirection, useMdeFontSizeValue, useMdePreviewFontValue, useMdeView } from "@/lib/store";
 
-// Set on the root so the font reaches everything, including the portalled drawer and tooltips.
 const useAppFont = () => {
   const font = findPreviewFont(useMdePreviewFontValue());
 
-  // Only the selected font is ever fetched; until it arrives the fallback stack is shown.
   useEffect(() => {
     void font.load?.();
 

@@ -15,7 +15,6 @@ const readingTime = (text: string) => {
 };
 
 export const PreviewPanel = () => {
-  // Rendering is deferred so typing never waits on the preview.
   const content = useDeferredValue(useMdeContentValue());
 
   return (

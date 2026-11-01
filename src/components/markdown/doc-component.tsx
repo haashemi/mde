@@ -48,7 +48,6 @@ const parseJson = <T,>(value: string | undefined): T | undefined => {
   }
 };
 
-// Matches the "<!-- ::start:tabs variant="package-manager" -->" metadata from @tanstack/markdown.
 interface PackageManagerMeta {
   mode: "dev-install" | "install" | "local-install";
   packagesByFramework: Record<string, string[][]>;
@@ -87,10 +86,6 @@ interface DocComponentProps {
   children?: ReactNode;
 }
 
-/**
- * Renders the comment components emitted by `docsMarkdownExtensions`, e.g. `<!-- ::start:tabs -->`.
- * The extension only produces metadata, so this is where it becomes interactive.
- */
 export const DocComponent = (props: DocComponentProps) => {
   const { "data-component": name, children } = props;
 

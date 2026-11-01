@@ -26,7 +26,6 @@ export const useMdeDirectionValue = () => useAtomValue(mdeDirectionAtom);
 export const useMdePreviewFontValue = () => useAtomValue(mdePreviewFontAtom);
 export const useMdeFontSizeValue = () => useAtomValue(mdeFontSizeAtom);
 
-/** Reads the content on demand, without re-rendering the caller on every keystroke. */
 export const useGetMdeContent = () => {
   const store = useStore();
   return () => store.get(mdeContentAtom);

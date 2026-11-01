@@ -66,7 +66,6 @@ const ViewToggle = () => {
 const SettingsButton = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
-  // The drawer is only loaded once it's first needed, then stays mounted for its close animation.
   const [hasOpened, setHasOpened] = useState(false);
 
   const changeOpen = (next: boolean) => {
@@ -106,7 +105,6 @@ const SettingsButton = () => {
 export const Header = () => {
   const getContent = useGetMdeContent();
 
-  // Downloading lives in the settings drawer; the shortcut works from anywhere.
   useHotkey(
     (event) => isModKey(event) && event.key.toLowerCase() === "s",
     () => void downloadMarkdown(getContent()),

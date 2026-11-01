@@ -1,4 +1,3 @@
-// Frontmatter stays unparsed in @tanstack/markdown; flat `key: value` pairs are all we need to show it.
 const parseEntries = (source: string) =>
   source
     .split("\n")

@@ -12,7 +12,6 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "favicon.svg", "apple-touch-icon-180x180.png"],
-      // Fonts are bundled but large, so they're cached the first time they're used instead of precached.
       workbox: {
         runtimeCaching: [
           {

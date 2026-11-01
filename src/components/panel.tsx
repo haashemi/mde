@@ -26,5 +26,4 @@ export const Panel = ({ label, meta, actions, className, children }: PanelProps)
   </section>
 );
 
-/** The line between the panels, with a small cross wherever it meets another grid line. */
 export const PanelDivider = () => <div aria-hidden className="panel-divider" />;

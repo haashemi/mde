@@ -1,21 +1,17 @@
 import type { MdeFontSize } from "@/lib/store";
 
-/** Multiplies the editor and preview text size; the app's own chrome keeps its size. */
 export const fontScales: Record<MdeFontSize, number> = { small: 0.875, medium: 1, large: 1.125, larger: 1.25 };
 
 export interface PreviewFont {
   id: string;
   name: string;
-  /** The CSS family name the font is registered under. */
   family?: string;
   category: "monospace" | "sans-serif" | "serif";
-  /** Loads the font's CSS chunk. Fonts are bundled but only fetched once they're picked. */
   load?: () => Promise<unknown>;
 }
 
 const defaultFont: PreviewFont = { id: "default", name: "Default", category: "sans-serif" };
 
-// The most used fonts for blog posts and long-form reading, all self-hosted so MDE works fully offline.
 export const previewFonts: PreviewFont[] = [
   defaultFont,
   {

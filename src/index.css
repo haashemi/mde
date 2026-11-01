@@ -94,12 +94,10 @@
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
-  /* `--app-font` is the font picked in settings; without one the app's own fonts are used. */
   html {
     font-family: var(--app-font, var(--font-mono));
     -webkit-tap-highlight-color: transparent;
   }
-  /* The panels scroll on their own; the page itself never should. */
   body {
     @apply overflow-hidden overscroll-none bg-background text-foreground antialiased;
   }
@@ -111,7 +109,6 @@
 /*
  * Unlayered on purpose: these must win over the typography plugin's `prose` utilities.
  */
-/* The line between the editor and the preview, crossed where it meets the header and panel bars. */
 .panel-divider {
   @apply relative h-px shrink-0 bg-border lg:h-auto lg:w-px;
 
@@ -131,7 +128,6 @@
   }
 }
 
-/* Sizes inside are in em so they follow `--font-scale`, the text size picked in settings. */
 .markdown {
   @apply leading-relaxed;
   font-size: calc(0.9375rem * var(--font-scale, 1));
@@ -213,7 +209,6 @@
   }
 }
 
-/* Code blocks: a header cell (title or language, copy button) over the highlighted source. */
 .code-block {
   @apply my-6 border;
 
@@ -303,7 +298,6 @@
   color: var(--th-variable);
 }
 
-/* GitHub-style callouts: "> [!NOTE]" */
 .markdown-alert {
   @apply my-6 border border-s-2 border-s-(--callout) px-4 py-3;
   --callout: var(--callout-note);

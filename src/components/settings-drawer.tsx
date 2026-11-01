@@ -150,7 +150,6 @@ const DownloadSetting = () => {
 
 const CONFIRM_TIMEOUT_MS = 3000;
 
-// Resetting throws away the document, so it takes a second click to go through.
 const ResetSetting = () => {
   const [, setContent] = useMdeContent();
   const [, setDirection] = useMdeDirection();
@@ -191,7 +190,6 @@ const ResetSetting = () => {
 interface SettingsDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  /** Where focus goes back to when the drawer closes. */
   finalFocus: RefObject<HTMLElement | null>;
 }
 

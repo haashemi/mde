@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { ColumnsIcon, DownloadSimpleIcon, EyeIcon, GearSixIcon, PencilSimpleLineIcon } from "@phosphor-icons/react";
+import { ColumnsIcon, EyeIcon, GearSixIcon, PencilSimpleLineIcon } from "@phosphor-icons/react";
 import { lazy, Suspense, useRef, useState } from "react";
 
 import type { MdeView } from "@/stores";
@@ -58,21 +58,6 @@ const ViewToggle = () => {
   );
 };
 
-const DownloadButton = () => {
-  const getContent = useGetMdeContent();
-  const download = () => void downloadMarkdown(getContent());
-
-  useHotkey((event) => isModKey(event) && event.key.toLowerCase() === "s", download);
-
-  return (
-    <HeaderTooltip label="Download markdown" shortcut="Ctrl S">
-      <HeaderButton aria-label="Download markdown" onClick={download}>
-        <DownloadSimpleIcon />
-      </HeaderButton>
-    </HeaderTooltip>
-  );
-};
-
 const SettingsButton = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
@@ -113,17 +98,26 @@ const SettingsButton = () => {
   );
 };
 
-export const Header = () => (
-  <header className="flex h-11 shrink-0 items-stretch border-b">
-    <div className="flex items-center gap-2 px-4 text-sm font-semibold tracking-tight">
-      <img src="/favicon.svg" alt="" className="size-4" />
-      mde
-    </div>
-    <div className="flex-1" />
-    <div className="flex items-stretch divide-x border-s">
-      <ViewToggle />
-      <DownloadButton />
-      <SettingsButton />
-    </div>
-  </header>
-);
+export const Header = () => {
+  const getContent = useGetMdeContent();
+
+  // Downloading lives in the settings drawer; the shortcut works from anywhere.
+  useHotkey(
+    (event) => isModKey(event) && event.key.toLowerCase() === "s",
+    () => void downloadMarkdown(getContent()),
+  );
+
+  return (
+    <header className="flex h-11 shrink-0 items-stretch border-b">
+      <div className="flex items-center gap-2 px-4 text-sm font-semibold tracking-tight">
+        <img src="/favicon.svg" alt="" className="size-4" />
+        mde
+      </div>
+      <div className="flex-1" />
+      <div className="flex items-stretch divide-x border-s">
+        <ViewToggle />
+        <SettingsButton />
+      </div>
+    </header>
+  );
+};

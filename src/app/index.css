@@ -6,15 +6,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Only downloaded once the font is picked in settings. License: public/fonts/geist-LICENSE.txt */
-@font-face {
-  font-family: "Geist Serif";
-  src: url("/fonts/geist-serif.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme inline {
   --font-heading: var(--font-mono);
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;

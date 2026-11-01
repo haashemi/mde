@@ -103,7 +103,7 @@ const FontSetting = () => {
         <Label key={font.id} className="h-10 cursor-pointer gap-3 px-3 hover:bg-muted has-data-checked:bg-muted">
           <RadioGroupItem value={font.id} aria-label={font.name} />
           <span className="flex-1 text-sm">{font.name}</span>
-          <span className="text-muted-foreground">{font.source ? font.category : "app"}</span>
+          <span className="text-muted-foreground">{font.family ? font.category : "app"}</span>
         </Label>
       ))}
     </RadioGroup>

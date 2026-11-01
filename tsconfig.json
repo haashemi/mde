@@ -2,7 +2,7 @@
   "extends": "@rabits/tsconfig/react",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.mjs"],

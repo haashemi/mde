@@ -113,13 +113,6 @@ export const previewFonts: PreviewFont[] = [
       ]),
   },
   {
-    id: "geist-serif",
-    name: "Geist Serif",
-    family: "Geist Serif",
-    category: "serif",
-    load: () => import("@/fonts/geist-serif/index.css"),
-  },
-  {
     id: "geist-mono",
     name: "Geist Mono",
     family: "Geist Mono Variable",

@@ -1,8 +1,0 @@
-/* Geist Serif isn't on Fontsource, so it's vendored from Vercel's `geist` package (OFL, see LICENSE.txt). */
-@font-face {
-  font-family: "Geist Serif";
-  src: url("./geist-serif.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}

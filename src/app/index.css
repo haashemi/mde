@@ -131,8 +131,10 @@
 }
 
 /* `--preview-font` is the font picked in settings; without one the app's own fonts are used. */
+/* Sizes inside are in em so they follow `--font-scale`, the text size picked in settings. */
 .markdown {
-  @apply text-[0.9375rem] leading-relaxed;
+  @apply leading-relaxed;
+  font-size: calc(0.9375rem * var(--font-scale, 1));
   font-family: var(--preview-font, var(--font-sans));
 
   /* Skips the visually hidden "Footnotes" heading, which must stay absolutely positioned. */
@@ -141,10 +143,10 @@
     font-family: var(--preview-font, var(--font-heading));
   }
   :where(h1) {
-    @apply border-b pb-3 text-2xl;
+    @apply border-b pb-3 text-[1.6em];
   }
   :where(h2) {
-    @apply text-xl;
+    @apply text-[1.3333em];
   }
   .heading-anchor {
     @apply absolute -start-6 w-6 text-muted-foreground no-underline opacity-0 transition-opacity;
@@ -183,14 +185,14 @@
   }
 
   table {
-    @apply w-full border-collapse border text-sm;
+    @apply w-full border-collapse border text-[0.9333em];
   }
   th,
   td {
     @apply border px-3 py-2;
   }
   thead th {
-    @apply bg-muted font-mono text-xs font-medium;
+    @apply bg-muted font-mono text-[0.8em] font-medium;
   }
 
   li:has(> input[type="checkbox"]) {
@@ -202,7 +204,7 @@
   }
 
   .footnotes {
-    @apply mt-12 border-t pt-4 text-sm text-muted-foreground;
+    @apply mt-12 border-t pt-4 text-[0.9333em] text-muted-foreground;
   }
   /* JetBrains Mono has a text glyph for "↩", which keeps it from rendering as an emoji. */
   .data-footnote-backref {
@@ -220,10 +222,10 @@
   }
 }
 .code-block-header {
-  @apply flex h-8 items-center justify-between gap-4 border-b ps-3 pe-1 font-mono text-xs text-muted-foreground;
+  @apply flex h-8 items-center justify-between gap-4 border-b ps-3 pe-1 font-mono text-[0.8em] text-muted-foreground;
 }
 .code-block pre {
-  @apply m-0 overflow-x-auto bg-muted/40 p-4 font-mono text-[0.8125rem] leading-relaxed text-(--th-token);
+  @apply m-0 overflow-x-auto bg-muted/40 p-4 font-mono text-[0.8667em] leading-relaxed text-(--th-token);
 }
 .th-line {
   @apply -mx-4 inline-block w-max min-w-[calc(100%+2rem)] px-4;
@@ -320,7 +322,7 @@
   }
 }
 .markdown-alert-title {
-  @apply my-0! font-mono text-xs font-medium text-(--callout);
+  @apply my-0! font-mono text-[0.8em] font-medium text-(--callout);
 }
 .markdown-alert-content > :last-child {
   @apply mb-0;
@@ -337,11 +339,11 @@
   }
 }
 .md-tabs-content:not(:has(> .code-block:only-child)) {
-  @apply px-4 text-[0.9375rem];
+  @apply px-4;
 }
 
 .frontmatter {
-  @apply mb-8 grid grid-cols-[auto_1fr] border font-mono text-xs;
+  @apply mb-8 grid grid-cols-[auto_1fr] border font-mono text-[0.8em];
 
   > div {
     @apply col-span-2 grid grid-cols-subgrid border-b last:border-b-0;

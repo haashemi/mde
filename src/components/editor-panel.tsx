@@ -46,7 +46,7 @@ export const EditorPanel = () => {
         spellCheck={false}
         autoCapitalize="off"
         autoComplete="off"
-        className="flex-1 resize-none overflow-y-auto bg-transparent p-4 font-mono text-base/relaxed outline-none placeholder:text-muted-foreground lg:text-sm"
+        className="flex-1 resize-none overflow-y-auto bg-transparent p-4 font-mono text-[calc(1rem*var(--font-scale,1))]/relaxed outline-none placeholder:text-muted-foreground lg:text-[calc(0.875rem*var(--font-scale,1))]"
       />
     </Panel>
   );

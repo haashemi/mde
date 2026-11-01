@@ -11,7 +11,7 @@ import {
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import type { MdeDirection } from "@/stores";
+import type { MdeDirection, MdeFontSize } from "@/stores";
 
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
@@ -21,7 +21,14 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { defaultMarkdownContent } from "@/lib/constants";
 import { downloadMarkdown, markdownFileName } from "@/lib/download";
 import { previewFonts } from "@/lib/fonts";
-import { useMdeContent, useMdeContentValue, useMdeDirection, useMdePreviewFont, useMdeView } from "@/stores";
+import {
+  useMdeContent,
+  useMdeContentValue,
+  useMdeDirection,
+  useMdeFontSize,
+  useMdePreviewFont,
+  useMdeView,
+} from "@/stores";
 
 const SettingsSection = ({ label, children }: { label: string; children: ReactNode }) => (
   <section className="border-b">
@@ -89,6 +96,18 @@ const DirectionSetting = () => {
   return <Segmented label="Text direction" options={directionOptions} value={direction} onChange={setDirection} />;
 };
 
+const fontSizeOptions: Option<MdeFontSize>[] = [
+  { value: "small", label: "Small" },
+  { value: "medium", label: "Medium" },
+  { value: "large", label: "Large" },
+  { value: "larger", label: "Larger" },
+];
+
+const FontSizeSetting = () => {
+  const [fontSize, setFontSize] = useMdeFontSize();
+  return <Segmented label="Font size" options={fontSizeOptions} value={fontSize} onChange={setFontSize} />;
+};
+
 const FontSetting = () => {
   const [fontId, setFontId] = useMdePreviewFont();
 
@@ -137,6 +156,7 @@ const ResetSetting = () => {
   const [, setDirection] = useMdeDirection();
   const [, setView] = useMdeView();
   const [, setFontId] = useMdePreviewFont();
+  const [, setFontSize] = useMdeFontSize();
   const [confirming, setConfirming] = useState(false);
 
   useEffect(() => {
@@ -152,6 +172,7 @@ const ResetSetting = () => {
     setDirection("ltr");
     setView("both");
     setFontId("default");
+    setFontSize("medium");
     setConfirming(false);
   };
 
@@ -196,6 +217,9 @@ export default function SettingsDrawer({ open, onOpenChange, finalFocus }: Setti
           </SettingsSection>
           <SettingsSection label="text direction">
             <DirectionSetting />
+          </SettingsSection>
+          <SettingsSection label="font size">
+            <FontSizeSetting />
           </SettingsSection>
           <SettingsSection label="preview font">
             <FontSetting />

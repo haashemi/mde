@@ -1,3 +1,8 @@
+import type { MdeFontSize } from "@/stores";
+
+/** Multiplies the editor and preview text size; the app's own chrome keeps its size. */
+export const fontScales: Record<MdeFontSize, number> = { small: 0.875, medium: 1, large: 1.125, larger: 1.25 };
+
 export interface PreviewFont {
   id: string;
   name: string;

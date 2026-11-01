@@ -60,7 +60,7 @@ const ViewToggle = () => {
 
 const DownloadButton = () => {
   const getContent = useGetMdeContent();
-  const download = () => downloadMarkdown(getContent());
+  const download = () => void downloadMarkdown(getContent());
 
   useHotkey((event) => isModKey(event) && event.key.toLowerCase() === "s", download);
 

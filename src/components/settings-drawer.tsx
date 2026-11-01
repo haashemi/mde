@@ -137,7 +137,7 @@ const DownloadSetting = () => {
       variant="outline"
       aria-label={`Download ${markdownFileName(content)}`}
       className="h-10 w-full justify-between"
-      onClick={() => downloadMarkdown(content)}
+      onClick={() => void downloadMarkdown(content)}
     >
       <span className="flex items-center gap-2">
         <DownloadSimpleIcon />

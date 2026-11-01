@@ -1,10 +1,15 @@
 import type { KeyboardEvent } from "react";
 
-import { useDeferredValue } from "react";
+import { MagicWandIcon } from "@phosphor-icons/react";
+import { useDeferredValue, useRef } from "react";
 
+import { Button } from "@/components/ui/button";
+import { isModKey, useHotkey } from "@/hooks/use-hotkey";
+import { formatMarkdown } from "@/lib/format";
 import { syncedScrollRef } from "@/lib/synced-scroll";
 import { useMdeContent } from "@/stores";
 
+import { HeaderTooltip } from "./header-button";
 import { Panel } from "./panel";
 
 const INDENT = "  ";
@@ -31,13 +36,45 @@ const EditorStats = ({ content }: { content: string }) => {
   return `${countWords(deferred)} words · ${countLines(deferred)} lines`;
 };
 
+const isFormatKey = (event: globalThis.KeyboardEvent) =>
+  event.shiftKey && event.altKey && !isModKey(event) && event.code === "KeyF";
+
 export const EditorPanel = () => {
   const [content, setContent] = useMdeContent();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const format = async () => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const formatted = await formatMarkdown(textarea.value);
+    if (formatted === textarea.value) return;
+
+    const { scrollTop, selectionStart } = textarea;
+    textarea.focus();
+    textarea.select();
+    insertText(textarea, formatted);
+    textarea.setSelectionRange(selectionStart, selectionStart);
+    textarea.scrollTop = scrollTop;
+  };
+
+  useHotkey(isFormatKey, () => void format());
+
+  const formatButton = (
+    <HeaderTooltip label="Format" shortcut="Shift Alt F">
+      <Button variant="ghost" size="icon-xs" aria-label="Format" onClick={() => void format()}>
+        <MagicWandIcon />
+      </Button>
+    </HeaderTooltip>
+  );
 
   return (
-    <Panel label="editor" meta={<EditorStats content={content} />}>
+    <Panel label="editor" meta={<EditorStats content={content} />} actions={formatButton}>
       <textarea
-        ref={syncedScrollRef}
+        ref={(element) => {
+          textareaRef.current = element;
+          return syncedScrollRef(element);
+        }}
         value={content}
         onChange={(event) => setContent(event.target.value)}
         onKeyDown={onKeyDown}

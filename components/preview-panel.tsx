@@ -1,7 +1,11 @@
-import { useDeferredValue } from "react";
+import type { CSSProperties } from "react";
 
+import { useDeferredValue } from "react";
+import { preconnect } from "react-dom";
+
+import { findPreviewFont, fontFamily, fontStylesheetUrl } from "@/lib/fonts";
 import { highlightThemeCss } from "@/lib/highlighter";
-import { useMdeContentValue } from "@/stores";
+import { useMdeContentValue, useMdePreviewFontValue } from "@/stores";
 
 import { Markdown } from "./markdown";
 import { Panel } from "./panel";
@@ -16,13 +20,22 @@ const readingTime = (text: string) => {
 export const PreviewPanel = () => {
   // Rendering is deferred so typing never waits on the preview.
   const content = useDeferredValue(useMdeContentValue());
+  const font = findPreviewFont(useMdePreviewFontValue());
+  const fontUrl = fontStylesheetUrl(font);
+
+  // Only the selected font is ever fetched.
+  if (fontUrl) preconnect("https://fonts.gstatic.com", { crossOrigin: "anonymous" });
 
   return (
     <Panel label="preview" meta={readingTime(content)}>
       <style href="mde-highlight-theme" precedence="default">
         {highlightThemeCss}
       </style>
-      <article className="markdown prose relative max-w-none flex-1 overflow-y-auto p-4 prose-neutral lg:p-8 dark:prose-invert">
+      {fontUrl && <link rel="stylesheet" href={fontUrl} precedence="default" />}
+      <article
+        style={{ "--preview-font": fontFamily(font) } as CSSProperties}
+        className="markdown relative prose max-w-none flex-1 overflow-y-auto p-4 prose-neutral lg:p-8 dark:prose-invert"
+      >
         <div className="mx-auto max-w-3xl">
           <Markdown source={content} />
         </div>

@@ -6,6 +6,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Only downloaded once the font is picked in settings. License: public/fonts/geist-LICENSE.txt */
+@font-face {
+  font-family: "Geist Serif";
+  src: url("/fonts/geist-serif.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --font-heading: var(--font-mono);
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
@@ -130,12 +139,15 @@
   }
 }
 
+/* `--preview-font` is the font picked in settings; without one the app's own fonts are used. */
 .markdown {
-  @apply font-sans text-[0.9375rem] leading-relaxed;
+  @apply text-[0.9375rem] leading-relaxed;
+  font-family: var(--preview-font, var(--font-sans));
 
   /* Skips the visually hidden "Footnotes" heading, which must stay absolutely positioned. */
   :where(h1, h2, h3, h4, h5, h6):not(.sr-only) {
-    @apply relative scroll-mt-4 font-heading font-semibold tracking-tight;
+    @apply relative scroll-mt-4 font-semibold tracking-tight;
+    font-family: var(--preview-font, var(--font-heading));
   }
   :where(h1) {
     @apply border-b pb-3 text-2xl;

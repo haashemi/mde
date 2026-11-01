@@ -12,6 +12,30 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "favicon.svg"],
+      // Keeps the preview font picked in settings available offline.
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith("/fonts/"),
+            handler: "CacheFirst",
+            options: { cacheName: "self-hosted-fonts" },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/,
+            handler: "StaleWhileRevalidate",
+            options: { cacheName: "google-fonts-stylesheets" },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-webfonts",
+              cacheableResponse: { statuses: [0, 200] },
+              expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 },
+            },
+          },
+        ],
+      },
       manifest: {
         name: "Markdown Editor",
         short_name: "MDE",

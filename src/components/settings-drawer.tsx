@@ -197,7 +197,10 @@ interface SettingsDrawerProps {
 export default function SettingsDrawer({ open, onOpenChange, finalFocus }: SettingsDrawerProps) {
   return (
     <Drawer open={open} onOpenChange={onOpenChange} swipeDirection="right">
-      <DrawerContent finalFocus={finalFocus}>
+      <DrawerContent
+        finalFocus={finalFocus}
+        className="pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)]"
+      >
         <div className="flex h-11 shrink-0 items-center justify-between border-b ps-4">
           <DrawerTitle>settings</DrawerTitle>
           <DrawerClose

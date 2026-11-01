@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 
+import { useTheme } from "next-themes";
 import { Activity, useEffect } from "react";
 
 import { EditorPanel } from "@/components/editor-panel";
@@ -21,15 +22,30 @@ const useAppFont = () => {
   }, [font]);
 };
 
+// The theme can differ from the OS setting, so the browser chrome follows the app's background instead.
+const THEME_COLORS = { light: "#fcfcfc", dark: "#0b0b0b" };
+
+const useThemeColor = () => {
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    if (!resolvedTheme) return;
+
+    const color = THEME_COLORS[resolvedTheme === "dark" ? "dark" : "light"];
+    for (const meta of document.querySelectorAll('meta[name="theme-color"]')) meta.setAttribute("content", color);
+  }, [resolvedTheme]);
+};
+
 function App() {
   const [view] = useMdeView();
   const [direction] = useMdeDirection();
   const fontSize = useMdeFontSizeValue();
   useAppFont();
+  useThemeColor();
 
   // Activity keeps hidden panels mounted (scroll, undo history) without rendering them on every keystroke.
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="flex h-dvh flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]">
       <Header />
       <main
         dir={direction}

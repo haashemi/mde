@@ -97,12 +97,31 @@
   html {
     font-family: var(--app-font, var(--font-mono));
     -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+  button,
+  a,
+  label,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+  /* Long-pressing a control shouldn't select its label. */
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
   }
   body {
     @apply overflow-hidden overscroll-none bg-background text-foreground antialiased;
   }
   ::selection {
     @apply bg-foreground text-background;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="drawer-popup"] {
+    transition-property: opacity;
   }
 }
 

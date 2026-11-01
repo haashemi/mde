@@ -111,7 +111,7 @@ export const Header = () => {
     <header className="flex h-11 shrink-0 items-stretch border-b">
       <div className="flex items-center gap-2 px-4 text-sm font-semibold tracking-tight">
         <img src="/favicon.svg" alt="" className="size-4" />
-        mde
+        MDE
       </div>
       <div className="flex-1" />
       <div className="flex items-stretch divide-x border-s">

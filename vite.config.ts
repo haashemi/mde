@@ -1,20 +1,14 @@
+import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { checker } from "vite-plugin-checker";
 import { VitePWA } from "vite-plugin-pwa";
-import tsconfigPaths from "vite-tsconfig-paths";
-
-const ReactCompilerConfig = {
-  target: "18", // '17' | '18' | '19'
-};
 
 export default defineConfig({
   plugins: [
-    checker({ terminal: false, typescript: true, eslint: { lintCommand: "eslint ./", useFlatConfig: true } }),
     tailwindcss(),
-    tsconfigPaths(),
-    react({ babel: { plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]] } }),
+    react(),
+    babel({ presets: [reactCompilerPreset()] }),
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "favicon.svg"],
@@ -35,4 +29,10 @@ export default defineConfig({
       },
     }),
   ],
+  css: { transformer: "lightningcss" },
+  resolve: { tsconfigPaths: true },
+
+  server: { host: true, port: 3000, strictPort: true },
+  build: { cssMinify: "lightningcss", emptyOutDir: true },
+  preview: { host: true, port: 3000, strictPort: true },
 });

@@ -6,7 +6,7 @@
 
 ## How it works?
 
-It's made of just a `textarea` for input and an `article` for the rendered markdown. The markdown input is rendered using [react-markdown](https://github.com/remarkjs/react-markdown) with `remark-gfm` and `remark-gemoji` plugins. RTL support happens by changing the direction of almost the whole app.
+It's made of just a `textarea` for input and an `article` for the rendered markdown. The markdown is rendered with [TanStack Markdown](https://github.com/TanStack/markdown) (including callouts, tabs, footnotes and frontmatter) and code blocks are highlighted with [TanStack Highlight](https://github.com/TanStack/highlight). The UI is built on [shadcn/ui](https://ui.shadcn.com). RTL support happens by changing the direction of the panels.
 
 ![screenshot](./public/screenshots/desktop.png)
 

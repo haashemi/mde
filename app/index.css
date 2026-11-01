@@ -1,0 +1,352 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/jetbrains-mono";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-mono);
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
+:root {
+  --radius: 0;
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.17 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.52 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.6 0 0);
+
+  --callout-note: oklch(0.55 0.15 255);
+  --callout-tip: oklch(0.55 0.14 150);
+  --callout-important: oklch(0.52 0.18 300);
+  --callout-warning: oklch(0.65 0.14 75);
+  --callout-caution: oklch(0.58 0.2 27);
+}
+
+.dark {
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.2 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.92 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.66 0 0);
+  --accent: oklch(0.22 0 0);
+  --accent-foreground: oklch(0.96 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.55 0 0);
+
+  --callout-note: oklch(0.7 0.13 255);
+  --callout-tip: oklch(0.72 0.14 150);
+  --callout-important: oklch(0.7 0.15 300);
+  --callout-warning: oklch(0.78 0.13 75);
+  --callout-caution: oklch(0.7 0.17 27);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  html {
+    @apply font-mono;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* The panels scroll on their own; the page itself never should. */
+  body {
+    @apply overflow-hidden overscroll-none bg-background text-foreground antialiased;
+  }
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+}
+
+/*
+ * Unlayered on purpose: these must win over the typography plugin's `prose` utilities.
+ */
+/* The line between the editor and the preview, crossed where it meets the header and panel bars. */
+.panel-divider {
+  @apply relative h-px shrink-0 bg-border lg:h-auto lg:w-px;
+
+  &::before,
+  &::after {
+    @apply absolute left-1/2 hidden size-2.5 -translate-1/2 lg:block;
+    content: "";
+    background:
+      linear-gradient(var(--muted-foreground), var(--muted-foreground)) center / 1px 100% no-repeat,
+      linear-gradient(var(--muted-foreground), var(--muted-foreground)) center / 100% 1px no-repeat;
+  }
+  &::before {
+    @apply top-0;
+  }
+  &::after {
+    @apply top-8;
+  }
+}
+
+.markdown {
+  @apply font-sans text-[0.9375rem] leading-relaxed;
+
+  /* Skips the visually hidden "Footnotes" heading, which must stay absolutely positioned. */
+  :where(h1, h2, h3, h4, h5, h6):not(.sr-only) {
+    @apply relative scroll-mt-4 font-heading font-semibold tracking-tight;
+  }
+  :where(h1) {
+    @apply border-b pb-3 text-2xl;
+  }
+  :where(h2) {
+    @apply text-xl;
+  }
+  .heading-anchor {
+    @apply absolute -start-6 w-6 text-muted-foreground no-underline opacity-0 transition-opacity;
+  }
+  :where(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
+  .heading-anchor:focus-visible {
+    @apply opacity-100;
+  }
+
+  a {
+    @apply underline decoration-border decoration-1 underline-offset-4 transition-colors hover:decoration-foreground;
+  }
+
+  :not(pre) > code {
+    @apply border bg-muted px-1 py-0.5 font-mono text-[0.85em] font-normal;
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  blockquote {
+    @apply border-s-2 border-foreground/30 font-normal text-muted-foreground not-italic;
+    p::before,
+    p::after {
+      content: none;
+    }
+  }
+
+  hr {
+    @apply my-10 border-t;
+  }
+
+  img {
+    @apply border;
+  }
+
+  table {
+    @apply w-full border-collapse border text-sm;
+  }
+  th,
+  td {
+    @apply border px-3 py-2;
+  }
+  thead th {
+    @apply bg-muted font-mono text-xs font-medium;
+  }
+
+  li:has(> input[type="checkbox"]) {
+    @apply list-none ps-0;
+    margin-inline-start: -1.25em;
+  }
+  input[type="checkbox"] {
+    @apply me-1 size-3.5 translate-y-0.5 accent-foreground;
+  }
+
+  .footnotes {
+    @apply mt-12 border-t pt-4 text-sm text-muted-foreground;
+  }
+  /* JetBrains Mono has a text glyph for "↩", which keeps it from rendering as an emoji. */
+  .data-footnote-backref {
+    @apply font-mono no-underline;
+    font-variant-emoji: text;
+  }
+}
+
+/* Code blocks: a header cell (title or language, copy button) over the highlighted source. */
+.code-block {
+  @apply my-6 border;
+
+  .md-tabs & {
+    @apply my-0 border-0;
+  }
+}
+.code-block-header {
+  @apply flex h-8 items-center justify-between gap-4 border-b ps-3 pe-1 font-mono text-xs text-muted-foreground;
+}
+.code-block pre {
+  @apply m-0 overflow-x-auto bg-muted/40 p-4 font-mono text-[0.8125rem] leading-relaxed text-(--th-token);
+}
+.th-line {
+  @apply -mx-4 inline-block w-max min-w-[calc(100%+2rem)] px-4;
+}
+.th-line--highlighted {
+  @apply bg-foreground/[0.07];
+}
+.th-line--inserted {
+  @apply bg-(--th-inserted)/15;
+}
+.th-line--deleted {
+  @apply bg-(--th-deleted)/15;
+}
+.th-token {
+  color: var(--th-token);
+}
+.th-attr {
+  color: var(--th-attr);
+}
+.th-code-inline {
+  color: var(--th-code-inline);
+}
+.th-command {
+  color: var(--th-command);
+}
+.th-comment {
+  color: var(--th-comment);
+}
+.th-deleted {
+  color: var(--th-deleted);
+}
+.th-function {
+  color: var(--th-function);
+}
+.th-heading {
+  color: var(--th-heading);
+}
+.th-inserted {
+  color: var(--th-inserted);
+}
+.th-keyword {
+  color: var(--th-keyword);
+}
+.th-link {
+  color: var(--th-link);
+}
+.th-literal {
+  color: var(--th-literal);
+}
+.th-meta {
+  color: var(--th-meta);
+}
+.th-number {
+  color: var(--th-number);
+}
+.th-operator {
+  color: var(--th-operator);
+}
+.th-property {
+  color: var(--th-property);
+}
+.th-selector {
+  color: var(--th-selector);
+}
+.th-string {
+  color: var(--th-string);
+}
+.th-tag {
+  color: var(--th-tag);
+}
+.th-type {
+  color: var(--th-type);
+}
+.th-variable {
+  color: var(--th-variable);
+}
+
+/* GitHub-style callouts: "> [!NOTE]" */
+.markdown-alert {
+  @apply my-6 border border-s-2 border-s-(--callout) px-4 py-3;
+  --callout: var(--callout-note);
+
+  &.markdown-alert-tip {
+    --callout: var(--callout-tip);
+  }
+  &.markdown-alert-important {
+    --callout: var(--callout-important);
+  }
+  &.markdown-alert-warning {
+    --callout: var(--callout-warning);
+  }
+  &.markdown-alert-caution {
+    --callout: var(--callout-caution);
+  }
+}
+.markdown-alert-title {
+  @apply my-0! font-mono text-xs font-medium text-(--callout);
+}
+.markdown-alert-content > :last-child {
+  @apply mb-0;
+}
+
+.md-tabs {
+  @apply my-6 gap-0 border;
+
+  [data-slot="tabs-list"] {
+    @apply h-8! w-full justify-start gap-0 border-b p-0;
+  }
+  [data-slot="tabs-trigger"] {
+    @apply h-full flex-none border-0 border-e px-3 font-mono after:bottom-[-1px]!;
+  }
+}
+.md-tabs-content:not(:has(> .code-block:only-child)) {
+  @apply px-4 text-[0.9375rem];
+}
+
+.frontmatter {
+  @apply mb-8 grid grid-cols-[auto_1fr] border font-mono text-xs;
+
+  > div {
+    @apply col-span-2 grid grid-cols-subgrid border-b last:border-b-0;
+  }
+  dt {
+    @apply border-e bg-muted px-3 py-2 text-muted-foreground;
+  }
+  dd {
+    @apply px-3 py-2;
+  }
+}

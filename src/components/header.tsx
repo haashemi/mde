@@ -13,8 +13,11 @@ import { isModKey, useHotkey } from "@/lib/use-hotkey";
 
 import { ShortcutTooltip } from "./shortcut-tooltip";
 
+const headerCellClass =
+  "h-full min-w-11 px-3 active:not-aria-[haspopup]:scale-100 [&_svg]:transition-transform [&_svg]:duration-150 [&_svg]:ease-out active:[&_svg]:scale-90";
+
 const HeaderButton = (props: ComponentProps<typeof Button>) => (
-  <Button variant="ghost" className="h-full min-w-11 px-3" {...props} />
+  <Button variant="ghost" className={headerCellClass} {...props} />
 );
 
 const loadSettingsDrawer = () => import("./settings-drawer");
@@ -53,7 +56,7 @@ const ViewToggle = () => {
           <ToggleGroupItem
             value={value}
             aria-label={label}
-            className="relative h-full min-w-11 text-muted-foreground aria-pressed:bg-transparent aria-pressed:text-foreground aria-pressed:after:absolute aria-pressed:after:inset-x-0 aria-pressed:after:-bottom-px aria-pressed:after:h-0.5 aria-pressed:after:bg-foreground"
+            className="relative h-full min-w-11 text-muted-foreground aria-pressed:bg-transparent aria-pressed:text-foreground aria-pressed:after:absolute aria-pressed:after:inset-x-0 aria-pressed:after:-bottom-px aria-pressed:after:h-0.5 aria-pressed:after:bg-foreground [&_svg]:transition-transform [&_svg]:duration-150 [&_svg]:ease-out active:[&_svg]:scale-90"
           >
             {icon}
           </ToggleGroupItem>
